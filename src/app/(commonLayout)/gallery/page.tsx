@@ -1,4 +1,5 @@
 import UploadButton from "@/components/ui/gallery/uploadButton";
+import View from "@/components/ui/gallery/view";
 import cloudinary from "cloudinary";
 
 interface IMyImage {
@@ -6,21 +7,25 @@ interface IMyImage {
 }
 
 export default async function Gallery() {
-  let res = (await cloudinary.v2.search
+  const res = (await cloudinary.v2.search
     .expression("resource_type:image")
     .sort_by("public_id", "desc")
-    .max_results(5)
+    // .max_results(100)
     .execute()) as { resources: IMyImage[] };
 
-  console.log(res?.resources);
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-4">
         <div className="text-4xl font-bold">Gallery</div>
         <UploadButton />
       </div>
-
-      {/* You can add gallery content here */}
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-4 grid-cols-1">
+        {res.resources.map((item, i) => (
+          <div key={i}>
+            <View source={item.public_id} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

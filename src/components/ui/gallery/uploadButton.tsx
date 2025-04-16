@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { CldUploadWidget } from "next-cloudinary";
 import { Button } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload"; // ✅ Import icon
+import { useRouter } from "next/navigation";
 
 interface IImageUpload {
   event: "success";
@@ -12,15 +14,18 @@ interface IImageUpload {
 }
 
 export default function UploadButton() {
-  const [imageId, setImageId] = useState("y9xmk7sjcvctxhqef2rb");
+  //page refresh
 
+  const router = useRouter();
   return (
     <div>
       <CldUploadWidget
         uploadPreset="image-gallery"
         onSuccess={(results) => {
           const res = results as IImageUpload;
-          setImageId(res.info.public_id);
+          setTimeout(() => {
+            router.refresh();
+          }, 1000);
         }}
       >
         {({ open }) => {
