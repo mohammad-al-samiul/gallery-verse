@@ -1,6 +1,6 @@
 "use client";
 import Navbar from "@/components/ui/navbar";
-import Sidebar from "@/components/ui/sidebar";
+import Sidebar from "@/components/ui/gallery/sidebar";
 import React from "react";
 
 export default function CommonLayout({

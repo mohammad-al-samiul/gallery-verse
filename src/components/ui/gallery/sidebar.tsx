@@ -7,12 +7,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import { useTheme } from "@mui/material/styles";
+import Link from "next/link";
 
 const drawerWidth = 240;
-// const navbarHeight = 64;
 
 export default function Sidebar() {
   const theme = useTheme();
@@ -33,7 +32,7 @@ export default function Sidebar() {
           top: 64, // navbar height
           left: 0,
           height: "calc(100vh - 64px)",
-          zIndex: (theme) => theme.zIndex.appBar - 1, // ensure it's under navbar
+          zIndex: (theme) => theme.zIndex.appBar - 1,
           backgroundColor: isDark ? "#1e1e1e" : "#ffffff",
           color: isDark ? "#ffffff" : "#000000",
         },
@@ -41,30 +40,18 @@ export default function Sidebar() {
     >
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon sx={{ color: "inherit" }}>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon sx={{ color: "inherit" }}>
+              <PhotoLibraryIcon />
+            </ListItemIcon>
+            <Link href={"/gallery"}>
+              <ListItemText primary="Gallery" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
       </List>
       <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon sx={{ color: "inherit" }}>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
     </Drawer>
   );
 }
