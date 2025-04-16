@@ -71,7 +71,10 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="fixed"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -157,7 +160,7 @@ export default function Navbar() {
               </Button>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0, width: { xs: "100%", sm: "auto" } }}>
+          <Box sx={{ flexGrow: 0, width: { xs: "auto", sm: "auto" } }}>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />

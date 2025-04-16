@@ -1,5 +1,6 @@
 "use client";
 import Navbar from "@/components/ui/navbar";
+import Sidebar from "@/components/ui/sidebar";
 import React from "react";
 
 export default function CommonLayout({
@@ -8,9 +9,10 @@ export default function CommonLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="min-h-screen">
       <Navbar />
-      {children}
+      <Sidebar />
+      <main className="ml-[240px] pt-[64px] p-4">{children}</main>
     </div>
   );
 }
