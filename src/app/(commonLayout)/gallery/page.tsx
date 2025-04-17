@@ -1,5 +1,6 @@
 import UploadButton from "@/components/ui/gallery/uploadButton";
 import View from "@/components/ui/gallery/view";
+import { ImageList } from "@mui/material";
 import cloudinary from "cloudinary";
 
 interface IMyImage {
@@ -12,20 +13,24 @@ export default async function Gallery() {
     .sort_by("public_id", "desc")
     .execute()) as { resources: IMyImage[] };
 
-  console.log(res?.resources);
+  //console.log(res?.resources);
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-4">
         <div className="text-4xl font-bold">Gallery</div>
         <UploadButton />
       </div>
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-10 grid-cols-1">
+
+      <ImageList
+        sx={{ width: "100%", height: "100%" }}
+        variant="quilted"
+        cols={4}
+        rowHeight={121}
+      >
         {res.resources.map((item, i) => (
-          <div key={i}>
-            <View source={item.public_id} />
-          </div>
+          <View key={i} source={item.public_id} />
         ))}
-      </div>
+      </ImageList>
     </div>
   );
 }
